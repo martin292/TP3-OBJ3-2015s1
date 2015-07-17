@@ -1,0 +1,21 @@
+Cliente Lucas, al dia.
+Cliente Martin, debe 5 pesos.
+Cliente Javier, tiene credito 1 pesos.
+Cliente Carlos, tiene credito 1 pesos.
+Cliente Emanuel, al dia.
+
+Las papas salen 8 pesos el kilo.
+Los tomates salen 25 pesos el medio kilo.
+Las frutillas salen 4 pesos los 100 gramos.
+Las berenjenas salen 1 pesos los 50 gramos.
+
+Lucas compra medio kilo de papas se redondea a 5 pesos
+Javier compra 20 kilos de papas
+Lucas compra 250 gramos de frutillas queda debiendo
+
+Arqueo de caja, se retiro 20 pesos a las una menos veinticinco am, finalizo a las tres en punto.
+Limpieza de local a las cuatro en punto pm, finalizo a las cuatro menos cinco.
+Arqueo de caja, se retiro 10 pesos a las tres y diez am, finalizo a las diez en punto.
+Se revisaron los tomates, frutillas y papas a las cuatro y media pm, finalizo a las cinco menos veinte.
+Arqueo de caja, se retiro 1 pesos a las cinco en punto am, finalizo a las cinco en punto.
+Sacame la salida en html,xml,sql.

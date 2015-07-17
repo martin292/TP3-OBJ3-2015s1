@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.edu.ar/unq/obj3/dsl/TextualVerduler" 
+       class = "ar.edu.unq.obj3.dsl.textualVerduler.TextualVerdulerPackage"
+       genModel = "model/generated/TextualVerduler.genmodel" /> 
+	
+  </extension>
+
+
+
+</plugin>

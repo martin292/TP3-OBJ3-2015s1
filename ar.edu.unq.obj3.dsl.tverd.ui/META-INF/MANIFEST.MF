@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ar.edu.unq.obj3.dsl.tverd.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: ar.edu.unq.obj3.dsl.tverd.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: ar.edu.unq.obj3.dsl.tverd;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: ar.edu.unq.obj3.dsl.ui.quickfix,
+ ar.edu.unq.obj3.dsl.ui.contentassist,
+ ar.edu.unq.obj3.dsl.ui.internal,
+ ar.edu.unq.obj3.dsl.ui.contentassist.antlr
+Bundle-Activator: ar.edu.unq.obj3.dsl.ui.internal.TextualVerdulerActivator

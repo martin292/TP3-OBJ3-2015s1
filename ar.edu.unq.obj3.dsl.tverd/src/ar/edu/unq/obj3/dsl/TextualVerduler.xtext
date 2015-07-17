@@ -1,0 +1,196 @@
+grammar ar.edu.unq.obj3.dsl.TextualVerduler with org.eclipse.xtext.common.Terminals
+
+generate textualVerduler "http://www.edu.ar/unq/obj3/dsl/TextualVerduler"
+
+Verduleria:
+	clientes += Cliente*
+	productos += Producto*
+	compras += Compra*
+	tareas += Tarea*
+	formatoDeSalida=Salida?
+	;
+
+//Declaracion de cliente-------------------------------------------------------------------
+
+Cliente:
+	'Cliente' name=ID ',' declaracion=Declaracion
+;
+
+
+Declaracion:
+	Debe | SeLeDebe | AlDia
+;
+
+Debe:
+	'debe' valorDeLaDeuda = INT 'pesos.'
+;
+
+SeLeDebe:
+	'tiene credito' creditoAFavor=INT 'pesos.'
+;
+
+AlDia:
+	{AlDia} 'al dia.'
+;
+
+//-----------------------------------------------------------------------------------------
+
+//Declaracion de producto------------------------------------------------------------------
+
+
+Producto:
+	('Las' | 'Los') name=ID 'salen' precio=INT 'pesos' ('el' | 'los') unidad=Unidad '.'
+;
+
+Unidad:
+	UnidadEnKilo | NGramos
+;
+
+UnidadEnKilo:
+	NKilos | Kilo | MedioKilo | CuartoKilo
+;
+
+NKilos:
+	kilos=INT 'kilos'
+;
+
+Kilo:
+	{Kilo}'kilo'
+;
+
+MedioKilo:
+	{MedioKilo} 'medio kilo'
+;
+
+CuartoKilo:
+	{CuartoKilo} 'cuarto kilo'
+;
+
+NGramos:
+	gramos=INT 'gramos'
+;
+//-----------------------------------------------------------------------------------------
+
+//Compra-----------------------------------------------------------------------------------
+
+Compra:
+	(CompraConDetalle | CompraSinDetalle)
+;
+
+CompraConDetalle:
+	comprador=[Cliente] 'compra'
+	productosComprados+= ProductoComprado
+	(',' productosComprados+=ProductoComprado)*
+	detalleCompra=DetalleCompra 
+;
+
+CompraSinDetalle:
+	comprador=[Cliente] 'compra'
+	productosComprados+= ProductoComprado
+	(',' productosComprados+=ProductoComprado)*
+;
+
+DetalleCompra:
+	DebeLaCompra | PagaLaCompra
+;
+
+
+DebeLaCompra:
+	RedondeoYQuedaDebiendo | QuedaDebiendo
+;
+
+PagaLaCompra:
+	Redondeo | RedondeoYPaga | Paga
+;
+
+Redondeo:
+	'se redondea a' totalRedondeado=INT 'pesos'
+;
+
+RedondeoYPaga:
+	redondeo=Redondeo ',' paga=Paga
+;
+
+QuedaDebiendo:
+	{QuedaDebiendo} 'queda debiendo'
+;
+
+RedondeoYQuedaDebiendo:
+	redondeo=Redondeo ',' quedaDebiendo=QuedaDebiendo
+;
+
+Paga:
+	'paga' pagoTotal=INT 'pesos'
+;
+
+ProductoComprado:
+	unidad=Unidad 'de' producto=[Producto] 
+;
+//-----------------------------------------------------------------------------------------
+
+//Actividades------------------------------------------------------------------------------
+
+ProductosAVerificar:
+	productosAVerificar += [Producto] ( ( ',' | 'y' ) productosAVerificar += [Producto] )*
+;
+
+ArqueoDeCaja:
+	'Arqueo de caja, se retiro' recaudacion=INT 'pesos'
+;
+
+Actividad:
+	{Actividad} 'Limpieza de local' |
+	 ('Se revisaron las' | 'Se revisaron los') ProductosAVerificar | ArqueoDeCaja
+;
+
+Minutos:
+	{Minutos} ('cinco' |'diez' | 'cuarto' | 'veinte' | 'veinticinco')
+;
+
+EnPunto:
+	{EnPunto} 'en punto'
+;
+
+YMedia:
+	{YMedia} 'media'
+;
+
+FinalizacionDeHora:
+	{FinalizacionDeHora} ( enPunto=EnPunto | 'y' (min=Minutos | yMedia=YMedia) | 'menos' min=Minutos)
+;
+
+Hora:
+	{Hora} ('una'|'dos'|'tres'|'cuatro'|'cinco'|'seis'|
+	'siete'|'ocho'|'nueve'|'diez'|'once'|'doce')
+;
+
+Horario:
+	hora = Hora horaAlFinalizar = FinalizacionDeHora 
+;
+
+Tarea:
+	Actividad 'a las' horarioComienzo=Horario ('am' | 'pm') ',' 'finalizo a las' horarioFinalizacion=Horario '.'
+;
+//-----------------------------------------------------------------------------------------
+
+//Salida-----------------------------------------------------------------------------------
+Salida:
+	'Sacame la salida en' salidas += FormatosDeSalida (',' salidas += FormatosDeSalida)* '.'
+;
+
+FormatosDeSalida:
+	Xml| Html | Sql
+;
+
+Xml:
+	{Xml} 'xml'
+;
+
+Html:
+	{Html} 'html'
+;
+
+Sql:
+	{Sql} 'sql'
+;
+//-----------------------------------------------------------------------------------------

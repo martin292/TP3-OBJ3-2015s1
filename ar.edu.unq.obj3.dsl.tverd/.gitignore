@@ -1,0 +1,5 @@
+*launch
+/bin/
+.settings/
+/model/
+/plugin.xml_gen
